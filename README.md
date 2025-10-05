@@ -9,7 +9,7 @@ It includes **SSL/TLS encryption**, **domain management**, **CDN caching**, and 
 
 ![Architecture Diagram](architecture-diagram.gif)
 
-## 🌐 Deployed Website Preview
+## Deployed Website Preview
 Here’s a screenshot of the static website successfully deployed via Amazon S3 and CloudFront.
 
 ![Deployed Website Screenshot](screenshot-deployed-site.png)
@@ -87,7 +87,7 @@ To stay within the **AWS Free Tier**, it’s best to disable or delete resources
 
 ---
 
-## 🗂️ Repository Structure
+## Repository Structure
 
 ```plaintext
 aws-static-website-deployment/
@@ -103,6 +103,6 @@ CloudFront logging was enabled and configured to store logs in an S3 bucket.
 A sample log file (`sample-log.json`) is included in the `cloudfront-logs-sample/` folder to demonstrate successful logging and monitoring.
 
 ---
-### 🪶 Author
+### Author
 **Cloud with Paula**  
 Cloud & AI Enthusiast  
