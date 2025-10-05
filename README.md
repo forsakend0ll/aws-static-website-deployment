@@ -90,12 +90,14 @@ aws-static-website-deployment/
 ├── README.md                ← this documentation  
 ├── architecture-diagram.gif ← architecture image  
 ├── index.html               ← static site file  
-└── cloudfront-logs-example/ ← sample logs or screenshots
+└── cloudfront-logs-example/ ← sample CloudFront access log
 ```
 ---
+### 📊 CloudFront Logs
+CloudFront logging was enabled and configured to store logs in an S3 bucket.  
+A sample log file (`sample-log.json`) is included in the `cloudfront-logs-sample/` folder to demonstrate successful logging and monitoring.
 
+---
 ### 🪶 Author
 **Cloud with Paula**  
 Cloud & AI Enthusiast  
-
-
