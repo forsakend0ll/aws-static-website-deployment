@@ -65,13 +65,13 @@ Learning Outcomes
 - Practiced cost-efficient cloud resource management  
 ---
  Repository Structure
-aws-static-website/
-┣  README.md
-┣ assets/
-┃ ┗ architecture-diagram.png
-┣ website/
-┃ ┣ index.html
-┃ ┗ error.html
+aws-static-website-deployment/
+│
+├── README.md ← this documentation
+├── architecture-diagram.png ← architecture image
+├── index.html ← static site file
+└── cloudfront-logs-example/ ← optional sample logs or screenshots
+
 ---
 Key Takeaway
 This project illustrates how AWS services integrate to create a secure, scalable, and globally available static website 
