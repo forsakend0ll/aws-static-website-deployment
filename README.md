@@ -92,7 +92,7 @@ aws-static-website-deployment/
 ├── architecture-diagram.png ← architecture image  
 ├── index.html               ← static site file  
 └── cloudfront-logs-example/ ← optional sample logs or screenshots
-
+```
 
 ---
 
