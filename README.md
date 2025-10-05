@@ -50,7 +50,6 @@ It includes **SSL/TLS encryption**, **domain management**, **CDN caching**, and 
 
 ### 4️⃣ Configure Route 53
 - Create an **A record (alias)** pointing your domain to the CloudFront distribution  
-- Optionally, add a **CNAME record** for `www`
 
 ### 5️⃣ Enable CloudWatch Logging
 - Go to **CloudFront → General → Logging and monitoring**  
