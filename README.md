@@ -98,7 +98,7 @@ aws-static-website-deployment/
 
 ## 🧠 Key Takeaway
 
-This project illustrates how AWS services integrate to create a **secure, scalable, and globally available static website**
+###This project illustrates how AWS services integrate to create a **secure, scalable, and globally available static website**
 ---
 
 ### 🪶 Author
