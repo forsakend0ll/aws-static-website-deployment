@@ -84,19 +84,21 @@ To stay within the **AWS Free Tier**, it’s best to disable or delete resources
 ---
 
 ## 🗂️ Repository Structure
+
+```plaintext
 aws-static-website-deployment/
 │
-├── README.md ← this documentation
-├── architecture-diagram.png ← architecture image
-├── index.html ← static site file
+├── README.md                ← this documentation  
+├── architecture-diagram.png ← architecture image  
+├── index.html               ← static site file  
 └── cloudfront-logs-example/ ← optional sample logs or screenshots
+
 
 ---
 
 ## 🧠 Key Takeaway
 
-This project illustrates how AWS services integrate to create a **secure, scalable, and globally available static website** — a foundational step in mastering **cloud automation and security**.
-
+This project illustrates how AWS services integrate to create a **secure, scalable, and globally available static website**
 ---
 
 ### 🪶 Author
