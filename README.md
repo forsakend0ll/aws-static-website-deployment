@@ -93,12 +93,6 @@ aws-static-website-deployment/
 ├── index.html               ← static site file  
 └── cloudfront-logs-example/ ← optional sample logs or screenshots
 ```
-
----
-
-## 🧠 Key Takeaway
-
-###This project illustrates how AWS services integrate to create a **secure, scalable, and globally available static website**
 ---
 
 ### 🪶 Author
