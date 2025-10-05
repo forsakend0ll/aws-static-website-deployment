@@ -1,11 +1,11 @@
-# 🌩️ AWS Static Website Hosting with S3, CloudFront, Route 53, ACM, and CloudWatch
+# AWS Static Website Hosting with S3, CloudFront, Route 53, ACM, and CloudWatch
 
 This project demonstrates how to host a secure static website using various AWS services under the **Free Tier**.  
 It includes **SSL/TLS encryption**, **domain management**, **CDN caching**, and **monitoring** with CloudWatch.
 
 ---
 
-## 🏗️ Architecture Overview
+## Architecture Overview
 
 ![Architecture Diagram](architecture-diagram.gif)
 
@@ -16,7 +16,7 @@ Here’s a screenshot of the static website successfully deployed via Amazon S3 
 
 ---
 
-## ☁️ AWS Services Used
+## AWS Services Used
 
 - **Amazon S3** – Hosts static website files (`index.html`, `error.html`)  
 - **Amazon CloudFront** – CDN (Content Delivery Network) for global content delivery and HTTPS encryption  
@@ -26,14 +26,14 @@ Here’s a screenshot of the static website successfully deployed via Amazon S3 
 
 ---
 
-## 🌐 Example Website URL
+## Example Website URL
 
 **https://cloudwithpaula.click**  
 *(This website was hosted temporarily for demonstration purposes using AWS Free Tier resources.)*
 
 ---
 
-## ⚙️ Step-by-Step Setup Summary
+## Step-by-Step Setup Summary
 
 ### 1️⃣ Create an S3 Bucket
 - Name the bucket after your domain name (e.g., `cloudwithpaula.click`)  
@@ -63,7 +63,7 @@ Here’s a screenshot of the static website successfully deployed via Amazon S3 
 
 ---
 
-## 💰 Teardown & Cost Management
+## Teardown & Cost Management
 
 To stay within the **AWS Free Tier**, it’s best to disable or delete resources after testing:
 
@@ -77,7 +77,7 @@ To stay within the **AWS Free Tier**, it’s best to disable or delete resources
 
 ---
 
-## 🎯 Learning Outcomes
+## Learning Outcomes
 
 - Deployed a static website using AWS global infrastructure  
 - Configured HTTPS using **ACM** and **CloudFront**  
@@ -98,7 +98,7 @@ aws-static-website-deployment/
 └── cloudfront-logs-example/ ← sample CloudFront access log
 ```
 ---
-### 📊 CloudFront Logs
+### CloudFront Logs
 CloudFront logging was enabled and configured to store logs in an S3 bucket.  
 A sample log file (`sample-log.json`) is included in the `cloudfront-logs-sample/` folder to demonstrate successful logging and monitoring.
 
