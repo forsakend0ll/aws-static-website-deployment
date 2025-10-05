@@ -1,11 +1,11 @@
 AWS Static Website Hosting with S3, CloudFront, Route 53, ACM, and CloudWatch
-
+---
 This project demonstrates how to host a secure static website using various AWS services under the Free Tier.  
 It includes SSL/TLS encryption, domain management, CDN caching, and  monitoring.
 
 Architecture Overview
 
-
+---
 AWS Services Used
 - Amazon S3 – Hosts static website files (`index.html`, `error.html`)
 - Amazon CloudFront – CDN for global content delivery and HTTPS encryption
@@ -63,7 +63,7 @@ Learning Outcomes
 - Managed DNS routing with Route 53  
 - Implemented CloudWatch logging for observability  
 - Practiced cost-efficient cloud resource management  
-
+---
  Repository Structure
 aws-static-website/
 ┣  README.md
@@ -72,10 +72,10 @@ aws-static-website/
 ┣ website/
 ┃ ┣ index.html
 ┃ ┗ error.html
-
+---
 Key Takeaway
 This project illustrates how AWS services integrate to create a secure, scalable, and globally available static website 
-
+---
 🪶 Author
 Paula K
 Cloud & AI Enthusiast
