@@ -88,7 +88,7 @@ To stay within the **AWS Free Tier**, it’s best to disable or delete resources
 aws-static-website-deployment/
 │
 ├── README.md                ← this documentation  
-├── architecture-diagram.png ← architecture image  
+├── architecture-diagram.gif ← architecture image  
 ├── index.html               ← static site file  
 └── cloudfront-logs-example/ ← sample logs or screenshots
 ```
@@ -96,5 +96,8 @@ aws-static-website-deployment/
 
 ### 🪶 Author
 
-**Paula**  
-Cloud & AI Enthusiast  
+<p align="center">
+  🪶 **Cloud with Paula**  
+  Cloud & AI Enthusiast  
+</p>
+
