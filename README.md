@@ -95,9 +95,7 @@ aws-static-website-deployment/
 ---
 
 ### 🪶 Author
+**Cloud with Paula**  
+Cloud & AI Enthusiast  
 
-<p align="center">
-  🪶 **Cloud with Paula**  
-  Cloud & AI Enthusiast  
-</p>
 
