@@ -45,7 +45,7 @@ It includes **SSL/TLS encryption**, **domain management**, **CDN caching**, and 
 ### 3️⃣ Create a CloudFront Distribution
 - **Origin domain:** your S3 *website endpoint*  
 - Attach your **ACM certificate** (from us-east-1)  
-- Add both domain names: `cloudwithpaula.click` and `www.cloudwithpaula.click`  
+- Add both domain names: `cloudwithpaula.click` 
 - Redirect **HTTP → HTTPS**
 
 ### 4️⃣ Configure Route 53
@@ -91,7 +91,7 @@ aws-static-website-deployment/
 ├── README.md                ← this documentation  
 ├── architecture-diagram.png ← architecture image  
 ├── index.html               ← static site file  
-└── cloudfront-logs-example/ ← optional sample logs or screenshots
+└── cloudfront-logs-example/ ← sample logs or screenshots
 ```
 ---
 
