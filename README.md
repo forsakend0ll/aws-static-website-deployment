@@ -43,14 +43,14 @@ Here’s a screenshot of the static website successfully deployed via Amazon S3 
 
 ### 2️⃣ Request a Certificate (ACM)
 - Go to **AWS Certificate Manager**  
-- Request a certificate in **us-east-1 (N. Virginia)** for your domain and `www` subdomain  
+- Request a certificate in **us-east-1 (N. Virginia)** for your domain
 - Validate using **DNS via Route 53**  
 - Wait for the certificate to be **Issued**
 
 ### 3️⃣ Create a CloudFront Distribution
 - **Origin domain:** your S3 *website endpoint*  
 - Attach your **ACM certificate** (from us-east-1)  
-- Add both domain names: `cloudwithpaula.click` 
+- Add domain name: `cloudwithpaula.click` 
 - Redirect **HTTP → HTTPS**
 
 ### 4️⃣ Configure Route 53
@@ -104,5 +104,5 @@ A sample log file (`sample-log.json`) is included in the `cloudfront-logs-sample
 
 ---
 ### Author
-**Cloud with Paula**  
+**Paula Kim**  
 Cloud & AI Enthusiast  
