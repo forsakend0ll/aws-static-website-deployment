@@ -30,7 +30,6 @@ Here’s a screenshot of the static website successfully deployed via Amazon S3 
 
 **https://cloudwithpaula.click**  
 *(This website was hosted temporarily for demonstration purposes using AWS Free Tier resources.)*
-
 ---
 
 ## Step-by-Step Setup Summary
@@ -38,13 +37,14 @@ Here’s a screenshot of the static website successfully deployed via Amazon S3 
 ### 1️⃣ Create an S3 Bucket
 - Name the bucket after your domain name (e.g., `cloudwithpaula.click`)  
 - Enable *Static Website Hosting*  
-- Upload `index.html` and `error.html`  
+- Upload `index.html` and `error.html`
+- Configure the error document as `error.html`
 - Make the bucket publicly accessible  
 
 ### 2️⃣ Request a Certificate (ACM)
-- Go to **AWS Certificate Manager**  
-- Request a certificate in **us-east-1 (N. Virginia)** for your domain
-- Validate using **DNS via Route 53**  
+- Open *AWS Certificate Manager* in us-east-1 (N. Virginia)  
+- Request a certificate for your root domain (`cloudwithpaula.click`)
+- Validate via **DNS using Route 53**  
 - Wait for the certificate to be **Issued**
 
 ### 3️⃣ Create a CloudFront Distribution
@@ -52,6 +52,7 @@ Here’s a screenshot of the static website successfully deployed via Amazon S3 
 - Attach your **ACM certificate** (from us-east-1)  
 - Add domain name: `cloudwithpaula.click` 
 - Redirect **HTTP → HTTPS**
+- Set Custom Error Page (error.html) for 404 responses
 
 ### 4️⃣ Configure Route 53
 - Create an **A record (alias)** pointing your domain to the CloudFront distribution  
@@ -63,27 +64,36 @@ Here’s a screenshot of the static website successfully deployed via Amazon S3 
 
 ---
 
+## Error Page Configuration
+
+An `error.html` file was uploaded to the S3 bucket to display a custom **404 Not Found** page for invalid paths.  
+
+Example:  
+`https://cloudwithpaula.click/thispagedoesnotexist`
+
+---
+
 ## Teardown & Cost Management
 
-To stay within the **AWS Free Tier**, it’s best to disable or delete resources after testing:
+To stay within the Free Tier, remove resources after testing:
 
-- Delete the **CloudFront distribution**  
-- Delete the **S3 bucket** (after downloading your files)  
-- Delete your **Route 53 hosted zone** (if not needed)  
-- Remove the **ACM certificate** if no longer used  
-- Disable **CloudWatch logs** to avoid storage costs  
-
-> 🧹 *These configurations are reversible for future redeployment.*
+- Delete CloudFront distribution
+- Delete S3 bucket (after downloading your files)
+- Delete Route 53 hosted zone (if unused)
+- Remove ACM certificate if no longer needed
+- Disable CloudWatch logs to prevent storage costs
+> 🧹 All configurations can be redeployed later if needed.
 
 ---
 
 ## Learning Outcomes
 
-- Deployed a static website using AWS global infrastructure  
-- Configured HTTPS using **ACM** and **CloudFront**  
-- Managed DNS routing with **Route 53**  
-- Implemented **CloudWatch logging** for observability  
-- Practiced **cost-efficient cloud resource management**
+- Deployed a static website using AWS global infrastructure
+- Configured HTTPS via ACM and CloudFront
+- Implemented custom error handling with error.html
+- Managed DNS routing with Route 53
+- Enabled CloudWatch logging for performance insights
+- Practiced cost-efficient resource management
 
 ---
 
@@ -94,13 +104,14 @@ aws-static-website-deployment/
 │
 ├── README.md                ← this documentation  
 ├── architecture-diagram.gif ← architecture image  
-├── index.html               ← static site file  
+├── index.html               ← static site file
+├── error.html               ← custom error page (404)  
 └── cloudfront-logs-example/ ← sample CloudFront access log
 ```
 ---
 ### CloudFront Logs
-CloudFront logging was enabled and configured to store logs in an S3 bucket.  
-A sample log file (`sample-log.json`) is included in the `cloudfront-logs-sample/` folder to demonstrate successful logging and monitoring.
+CloudFront logging was enabled and configured to store logs in an S3 bucket.
+A sample log file (sample-log.json) is included in the cloudfront-logs-sample/ folder to demonstrate logging and monitoring setup.
 
 ---
 ### Author
