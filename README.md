@@ -28,9 +28,9 @@ Here’s a screenshot of the static website successfully deployed via Amazon S3 
 
 ## Example Website URL
 
-`https://cloudwithpaula.click`
----
-(This website was hosted temporarily for demonstration purposes using AWS Free Tier resources.)
+**https://cloudwithpaula.click**  
+*(This website was temporarily deployed using AWS Free Tier resources for demonstration purposes and may no longer be active.)*
+
 ---
 
 ## Step-by-Step Setup Summary
