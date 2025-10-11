@@ -1,118 +1,126 @@
-# AWS Static Website Hosting with S3, CloudFront, Route 53, ACM, and CloudWatch
+# AWS Cloud Cost Calculator with Lambda, S3, SNS, EventBridge, and CloudWatch
 
-This project demonstrates how to host a secure static website using various AWS services under the **Free Tier**.  
-It includes **SSL/TLS encryption**, **domain management**, **CDN caching**, and **monitoring** with CloudWatch.
+This project demonstrates how to automate **AWS cost tracking, reporting, and alerting** using serverless AWS services under the **Free Tier**.  
+It includes **weekly report generation**, **cost alerts**, and **automated scheduling** with EventBridge.
 
 ---
 
 ## Architecture Overview
 
-![Architecture Diagram](architecture-diagram.gif)
+![Architecture Diagram](docs/architecture-diagram.gif)
 
-## Deployed Website Preview
-Here’s a screenshot of the static website successfully deployed via Amazon S3 and CloudFront.
-
-![Deployed Website Screenshot](screenshot-deployed-site.png)
+The system operates without manual intervention — once deployed, it retrieves cost data, generates reports, and sends notifications automatically.
 
 ---
 
 ## AWS Services Used
 
-- **Amazon S3** – Hosts static website files (`index.html`, `error.html`)  
-- **Amazon CloudFront** – CDN (Content Delivery Network) for global content delivery and HTTPS encryption  
-- **AWS Certificate Manager (ACM)** – Provides free SSL/TLS certificates for secure HTTPS  
-- **Amazon Route 53** – Manages the custom domain and DNS records  
-- **Amazon CloudWatch** – Logs and monitors CloudFront activity for analytics and performance insights  
+- **AWS Lambda** – Retrieves AWS cost data from Cost Explorer, generates weekly cost reports, and sends SNS alerts  
+- **Amazon S3** – Stores generated reports in `/reports/` folder  
+- **Amazon SNS (Simple Notification Service)** – Sends email notifications when reports are uploaded or when billing thresholds are exceeded  
+- **Amazon EventBridge** – Schedules Lambda execution on a weekly basis (every 7 days)  
+- **Amazon CloudWatch** – Monitors billing metrics and triggers alerts when total estimated charges exceed the threshold  
+- **AWS Cost Explorer** – Provides granular billing and usage data for the report  
 
 ---
 
-## Example Website URL
-
-**https://cloudwithpaula.click**  
-*(This website was temporarily deployed using AWS Free Tier resources for demonstration purposes and may no longer be active.)*
-
----
-
-## Step-by-Step Setup Summary
+## ⚙️ Step-by-Step Setup Summary
 
 ### 1️⃣ Create an S3 Bucket
-- Name the bucket after your domain name (e.g., `cloudwithpaula.click`)  
-- Enable *Static Website Hosting*  
-- Upload `index.html` and `error.html`
-- Configure the error document as `error.html`
-- Make the bucket publicly accessible  
-
-### 2️⃣ Request a Certificate (ACM)
-- Open *AWS Certificate Manager* in us-east-1 (N. Virginia)  
-- Request a certificate for your root domain (`cloudwithpaula.click`)
-- Validate via **DNS using Route 53**  
-- Wait for the certificate to be **Issued**
-
-### 3️⃣ Create a CloudFront Distribution
-- **Origin domain:** your S3 *website endpoint*  
-- Attach your **ACM certificate** (from us-east-1)  
-- Add domain name: `cloudwithpaula.click` 
-- Redirect **HTTP → HTTPS**
-- Set Custom Error Page (error.html) for 404 responses
-
-### 4️⃣ Configure Route 53
-- Create an **A record (alias)** pointing your domain to the CloudFront distribution  
-
-### 5️⃣ Enable CloudWatch Logging
-- Go to **CloudFront → General → Logging and monitoring**  
-- Create an **Access Log Delivery** to an S3 bucket  
-- View logs in **CloudWatch Logs**
+- Name: `cloud-cost-tracker-cloudwithpaula`
+- Create folder: `/reports/`
+- Ensure the **Lambda IAM role** has `s3:PutObject` permissions
 
 ---
 
-## Error Page Configuration
-
-An `error.html` file was uploaded to the S3 bucket to display a custom **404 Not Found** page for invalid paths.  
-
-Example:  
-`https://cloudwithpaula.click/thispagedoesnotexist`
+### 2️⃣ Create an SNS Topic
+- Topic name: `CostAlerts`
+- Add an **email subscription** and confirm via your inbox  
+- Note down the **Topic ARN** for Lambda environment variable configuration
 
 ---
 
-## Teardown & Cost Management
-
-To stay within the Free Tier, remove resources after testing:
-
-- Delete CloudFront distribution
-- Delete S3 bucket (after downloading your files)
-- Delete Route 53 hosted zone (if unused)
-- Remove ACM certificate if no longer needed
-- Disable CloudWatch logs to prevent storage costs
-> 🧹 All configurations can be redeployed later if needed.
-
----
-
-## Learning Outcomes
-
-- Deployed a static website using AWS global infrastructure
-- Configured HTTPS via ACM and CloudFront
-- Implemented custom error handling with error.html
-- Managed DNS routing with Route 53
-- Enabled CloudWatch logging for performance insights
-- Practiced cost-efficient resource management
+### 3️⃣ Create the Lambda Function
+- Function name: `AWS_Cost_Tracker`
+- Runtime: **Python 3.12**
+- Memory: **256 MB**, Timeout: **30 seconds**
+- Upload file: `aws_cost_tracker.py`
+- IAM permissions required:
+  - `ce:GetCostAndUsage`
+  - `s3:PutObject`
+  - `sns:Publish`
+- Add environment variables:
+  - `S3_BUCKET = cloud-cost-tracker-cloudwithpaula`
+  - `SNS_TOPIC_ARN = arn:aws:sns:REGION:ACCOUNT_ID:CostAlerts`
+- Test manually:
+  - Verify S3 upload
+  - Confirm SNS email alert received
 
 ---
 
+### 4️⃣ Create an EventBridge Rule
+- Rule name: `WeeklyCostReportTrigger`
+- Schedule: **Fixed rate of 7 days**
+- Target: `AWS_Cost_Tracker` Lambda function
+- Event bus: `default`
+- Ensure EventBridge → Lambda invocation permissions are auto-granted
+
+---
+
+### 5️⃣ Configure CloudWatch Billing Alarm
+- Metric: `Billing → Total Estimated Charge → EstimatedCharges`
+- Threshold: `$5` (demo)
+- Action: Send notification to SNS topic `CostAlerts`
+- Verify that alert emails are sent when the threshold is exceeded
+
+---
+
+## ✅ Verification & Results
+
+| Test Type | Result |
+|------------|---------|
+| Manual Lambda execution | Report uploaded to S3 and email sent |
+| EventBridge trigger | Automatic report generated successfully |
+| CloudWatch billing alarm | SNS notification received |
+| End-to-end workflow | Fully automated cost tracking validated |
+
+---
+
+## 📸 Example Output Preview
+
+Here’s a sample generated report visualization:
+
+![Example Report Screenshot](docs/example-report.png)
+
+Example file name:
+
+---
 ## Repository Structure
 
 ```plaintext
-aws-static-website-deployment/
+cloud-cost-calculator/
 │
-├── README.md                ← this documentation  
-├── architecture-diagram.gif ← architecture image  
-├── index.html               ← static site file
-├── error.html               ← custom error page (404)  
-└── cloudfront-logs-example/ ← sample CloudFront access log
+├── aws_cost_tracker.py          ← Lambda function code for cost tracking and SNS alerts  
+│
+├── docs/
+│   ├── architecture-diagram.gif ← Architecture overview diagram  
+│   └── example-report.png       ← Screenshot of generated cost report  
+│
+├── examples/
+│   └── example_report.csv       ← Sample output report stored in S3  
+│
+└── README.md                    ← Full project documentation (this file)
+
 ```
----
-### CloudFront Logs
-CloudFront logging was enabled and configured to store logs in an S3 bucket.
-A sample log file (sample-log.json) is included in the cloudfront-logs-sample/ folder to demonstrate logging and monitoring setup.
+
+## Learning Outcomes
+
+- Built **a serverless AWS cost tracking system** using multiple AWS services
+- Integrated **Lambda, S3, SNS, and EventBridge** for automation
+- Implemented custom error handling with error.html
+- Used **AWS Cost Explorer API** programmatically
+- Configured **CloudWatch Billing Alarms** for real-time cost monitoring
+- Practiced **secure and cost-efficient resource management** under the AWS Free Tier
 
 ---
 ### Author
